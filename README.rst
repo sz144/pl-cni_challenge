@@ -73,10 +73,12 @@ Otherwise, visit https://docs.docker.com/install/ for installation directions
    Create a new build rule by clicking the ``BUILD RULES +``  button. A good rule good be **Source type:** ``Tag``,
    **Source:** ``/^[0-9.]+$/`` and **Docker Tag:** ``version-{sourceref}``.
 
+   Do not delete the default build rule that is already in place, this handles the 'latest' tag for pulling the most recent Docker image.
+
    Click ``Create && Build``  button to finish the setup and trigger the automated build.
    For more information on Automated Builds, please visit https://docs.docker.com/docker-hub/builds/. 
 
-   After ths build has completed, the ``cni_challenge`` bare bones example is now available as a Docker image to be pulled from your DockerHub. The link to it will be ${your_Docker_account name}/${cni_challenge_DockerRepo}.
+   After the build has completed, the ``cni_challenge`` bare bones example is now available as a Docker image to be pulled from your DockerHub. The link to it will be ${your_Docker_account name}/${cni_challenge_DockerRepo}.
 
 Arguments
 ---------
@@ -152,12 +154,13 @@ Now, prefix all calls with
 
 The output file of rotated vectors,  ``classifications.txt``, will be in  ``outputdir``.
 
-Thus, getting inline help is:
+Our barebones Docker image can be retrieved (from DockerHug 'aiwc') and executed (calling 'man') on your machine as follows (with directories 'inputdir' and 'outputdir' as specified above):
 
 .. code:: bash
 
+    docker pull aiwc/pl-cni_challenge
     sudo docker run --rm -v $(pwd)/inputdir:/incoming -v $(pwd)/outputdir:/outgoing      \
-                 pl-cni_challenge cni_challenge.py                                       \
+                 aiwc/pl-cni_challenge cni_challenge.py                                  \
                  --man                                                                   \
                  /incoming /outgoing
 
